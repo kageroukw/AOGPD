@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AOGPD.Models.CivilianLicensePlate>
+
+@{
+    ViewData["Title"] = "Totally Secret Admin View";
+}
+
+<center><table class="table">
+    <thead>
+        <tr>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.LicensePlate)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.VehicleName)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.VehicleColor)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.AdditionalVehicleDetails)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.PlateOwner)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.Registration)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.Insurance)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.Additional)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.LicensePlate)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.VehicleName)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.VehicleColor)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.AdditionalVehicleDetails)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.PlateOwner)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.Registration)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.Insurance)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.Additional)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table></center>

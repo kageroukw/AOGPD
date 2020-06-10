@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using AOGPD.Database;
+
+namespace AOGPD.Controllers
+{
+    public class PoliceController : Controller
+    {
+        private readonly ILogger<PoliceController> _logger;
+        private readonly AOGDbContext _ctx;
+
+        public PoliceController(ILogger<PoliceController> logger, AOGDbContext context)
+        {
+            _logger = logger;
+            _ctx = context;
+        }
+
+        public IActionResult index()
+        {
+            return View();
+        }
+
+        public IActionResult civilian()
+            => View();
+
+        public IActionResult plate()
+            => View();
+
+        public IActionResult nodata()
+            => View();
+
+        [HttpGet]
+        public async Task<IActionResult> lookup(string firstName, string lastName)
+        {
+            if (ModelState.IsValid)
+            {
+                var civi = await _ctx.Character
+                    .Where(x => x.FirstName == firstName && x.LastName == lastName)
+                    .FirstOrDefaultAsync();
+
+                if (civi == null)
+                {
+                    return RedirectToAction(nameof(nodata));
+                }
+
+                ViewBag.fName = civi.FirstName;
+                ViewBag.lName = civi.LastName;
+                ViewBag.dob = civi.DateofBirth;
+                ViewBag.citations = civi.Citations;
+                ViewBag.wanted = civi.Wanted;
+            }
+
+            return View("civilian");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> platelookup(string licensePlate)
+        {
+            if (ModelState.IsValid)
+            {
+                var plate = await _ctx.LicensePlate
+                    .Where(x => x.LicensePlate == licensePlate)
+                    .FirstOrDefaultAsync();
+
+                if (plate == null)
+                {
+                    return RedirectToAction(nameof(nodata));
+                }
+
+                ViewBag.vicN = plate.VehicleName;
+                ViewBag.vicC = plate.VehicleColor;
+                ViewBag.vicAD = plate.AdditionalVehicleDetails;
+                ViewBag.licPlate = plate.LicensePlate;
+                ViewBag.pltO = plate.PlateOwner;
+                ViewBag.reg = plate.Registration;
+                ViewBag.ins = plate.Insurance;
+                ViewBag.add = plate.Additional;
+            }
+
+            return View("plate");
+        }
+    }
+}

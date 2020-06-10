@@ -1,0 +1,89 @@
+﻿@model CivilianLicensePlate
+
+@{
+    ViewData["Title"] = "Civilian - AOGPD";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Vehicle</h1>
+    <hr />
+    <form asp-action="plate" enctype="multipart/form-data" method="post" class="mt-2">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Fields marked with <b>*</b> must be filled!</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">License Plate <b>*</b></label>
+            <div class="col-sm-10">
+                <input asp-for="LicensePlate" class="form-control" type="text" placeholder="Ex: 12AAA345" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Plate Owner <b>*</b></label>
+            <div class="col-sm-10">
+                <input asp-for="PlateOwner" class="form-control" type="text" placeholder="Ex: John Doe" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text text-info" for="registration">Registration <b>*</b></label>
+            <div class="col-sm-10">
+                <select asp-for="Registration" class="form-control" name="registration" id="registration" required>
+                    <option value="Registered" selected required>Registered</option>
+                    <option value="Expired" required>Expired</option>
+                    <option value="Unregistered" required>Unregistered</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text text-info" for="insured">Insurance <b>*</b></label>
+            <div class="col-sm-10">
+                <select asp-for="Insurance" class="form-control" name="insured" id="insured" required>
+                    <option value="Insured" selected required>Insured</option>
+                    <option value="Expired" required>Expired</option>
+                    <option value="Uninsured" required>Uninsured</option>
+                </select>
+            </div>
+        </div>
+        <hr />
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Vehicle Name</label>
+            <div class="col-sm-10">
+                <input asp-for="VehicleName" class="form-control" type="text" placeholder="Ex: Contender" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Vehicle Color</label>
+            <div class="col-sm-10">
+                <input asp-for="VehicleColor" class="form-control" type="text" placeholder="Ex: Blue" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Additional Vehicle Details/Information</label>
+            <div class="col-sm-10">
+                <input asp-for="AdditionalVehicleDetails" class="form-control" type="text" placeholder="Ex: Green underglow, white hood" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Additional</label>
+            <div class="col-sm-10">
+                <input asp-for="Additional" class="form-control" type="text" placeholder="Ex: Wanted, Stolen" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <button type="submit" id="regPlt" class="btn btn-success">Register Vehicle</button>
+            </div>
+            <label class="col-sm-2 col-form-label text text-success" id="succ" hidden>Successfully Registered!</label>
+        </div>
+    </form>
+    <a asp-controller="civilian" asp-action="civilian"><input id="CivButton" type="button" value="Register Civilian" class="btn btn-warning" /></a>
+
+    @section Scripts {
+        <script>
+            var x = document.getElementById("regPlt");
+            var y = document.getElementById("succ");
+            x.onclick = function () {
+                y.hidden = false;
+            };
+        </script>
+    }
+</div>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AOGPD.Models.CivilianCharacter>
+
+@{
+    ViewData["Title"] = "Totally Secret Admin View";
+}
+
+<center><table class="table">
+    <thead>
+        <tr>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.FirstName)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.LastName)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.DateofBirth)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.Citations)
+            </th>
+            <th style="text-align: center; color: white;">
+                @Html.DisplayNameFor(x => x.Wanted)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.FirstName)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.LastName)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.DateofBirth)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.Citations)
+            </td>
+            <td style="text-align: center; color: white;">
+                @Html.DisplayFor(i => item.Wanted)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table></center>
