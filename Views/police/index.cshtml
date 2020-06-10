@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AOGPD.Models.Bolo>
+
+@{
+    ViewData["Title"] = "Police - AOGPD";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Dashboard</h1>
+    <hr />
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <a asp-action="civilian"><input class="btn btn-primary" type="submit" value="Person Lookup" /></a>
+            <a asp-action="plate"><input class="btn btn-primary" type="submit" value="Vehicle Lookup" /></a>
+        </div>
+    </div>
+    <hr />
+    <h2>Bolos</h2>
+    <center>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="color: white; background-color: #131E28;">
+                        <b>@Html.DisplayNameFor(x => x.LicensePlate)</b>
+                    </th>
+                    <th style="color: white; background-color: #131E28;">
+                        <b>@Html.DisplayNameFor(x => x.VehicleName)</b>
+                    </th>
+                    <th style="color: white; background-color: #131E28;">
+                        <b>@Html.DisplayNameFor(x => x.VehicleColor)</b>
+                    </th>
+                    <th style="color: white; background-color: #131E28;">
+                        <b>@Html.DisplayNameFor(x => x.WantedFor)</b>
+                    </th>
+                    <th style="color: white; background-color: #131E28;">
+                        <b>Actions</b>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                <tr>
+                    <td style="color: white; background-color: #131E28;">
+                        @Html.DisplayFor(i => item.LicensePlate)
+                    </td>
+                    <td style="color: white; background-color: #131E28;">
+                        @Html.DisplayFor(i => item.VehicleName)
+                    </td>
+                    <td style="color: white; background-color: #131E28;">
+                        @Html.DisplayFor(i => item.VehicleColor)
+                    </td>
+                    <td style="color: white; background-color: #131E28;">
+                        @Html.DisplayFor(i => item.WantedFor)
+                    </td>
+                    <td style="color: white; background-color: #131E28;">
+                        <a asp-action="remove"><input class="btn btn-danger" type="submit" value="🗑️ Remove" /></a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </center>
+</div>

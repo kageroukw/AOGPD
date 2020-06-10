@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using AOGPD.Database;
+using AOGPD.ViewModels;
+using AOGPD.Models;
 
 namespace AOGPD.Controllers
 {
@@ -20,9 +22,9 @@ namespace AOGPD.Controllers
             _ctx = context;
         }
 
-        public IActionResult index()
+        public async Task<IActionResult> index()
         {
-            return View();
+            return View(await _ctx.Bolo.ToListAsync());
         }
 
         public IActionResult civilian()

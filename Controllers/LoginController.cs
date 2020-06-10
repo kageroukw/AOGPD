@@ -19,8 +19,6 @@ namespace AOGPD.Controllers
     {
         private readonly ILogger<LoginController> _logger;
         private readonly AOGDbContext _ctx;
-        private readonly UserManager<Dispatcher> _dispatchUser;
-        private readonly SignInManager<Dispatcher> _dispatchSign;
 
         public LoginController(ILogger<LoginController> logger, AOGDbContext context)
         {
@@ -55,16 +53,10 @@ namespace AOGPD.Controllers
                     return RedirectToAction(nameof(nodata));
                 }
 
-                return RedirectToAction((nameof(DispatchResult)));
+                return RedirectToAction("index", "dispatch");
             }
 
             return View("index");
-        }
-
-        [AuthorizePageHandler]
-        public IActionResult DispatchResult()
-        {
-            return 
         }
     }
 }

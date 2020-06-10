@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using AOGPD.Models;
+using System.Reflection;
 
 namespace AOGPD.Database
 {
@@ -17,6 +18,8 @@ namespace AOGPD.Database
         public DbSet<CivilianCharacter> Character { get; set; }
         public DbSet<CivilianLicensePlate> LicensePlate { get; set; }
         public DbSet<Dispatcher> Dispatch { get; set; }
+
+        public DbSet<Bolo> Bolo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -43,6 +46,13 @@ namespace AOGPD.Database
             disp.HasIndex(x => x.Id);
             disp.HasIndex(x => x.UserName);
             disp.HasIndex(x => x.Password);
+
+            var bol = builder.Entity<Bolo>().ToTable("Bolo");
+            bol.HasIndex(x => x.Id);
+            bol.HasIndex(x => x.LicensePlate);
+            bol.HasIndex(x => x.VehicleName);
+            bol.HasIndex(x => x.VehicleColor);
+            bol.HasIndex(x => x.WantedFor);
         }
     }
 }
