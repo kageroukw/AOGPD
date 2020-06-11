@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AOGPD.Models.Bolo>
 
 @{
-    ViewData["Title"] = "Police - AOGPD";
+    ViewData["Title"] = "Police Dashboard";
 }
 
 <div class="text-center">
@@ -9,29 +9,31 @@
     <hr />
     <div class="form-group row">
         <div class="col-sm-12">
-            <a asp-action="civilian"><input class="btn btn-primary" type="submit" value="Person Lookup" /></a>
-            <a asp-action="plate"><input class="btn btn-primary" type="submit" value="Vehicle Lookup" /></a>
+            <a asp-controller="police" asp-action="civilian"><input class="btn btn-primary" type="button" value="Person Lookup" /></a>
+            <a asp-controller="police" asp-action="plate"><input class="btn btn-primary" type="button" value="Vehicle Lookup" /></a>
+            <a asp-controller="police" asp-action="tencodes"><input class="btn btn-primary" type="button" value="10-Codes" /></a>
+            <a asp-controller="police" asp-action="penalcode"><input class="btn btn-primary" type="button" value="Penal Code" /></a>
         </div>
     </div>
     <hr />
     <h3 class="display-4">Bolos</h3>
     <center>
-        <table class="table">
+        <table class="table" style="color: white; background-color: #131E28;">
             <thead>
                 <tr>
-                    <th style="color: white; background-color: #131E28;">
+                    <th>
                         <b>@Html.DisplayNameFor(x => x.LicensePlate)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28;">
+                    <th>
                         <b>@Html.DisplayNameFor(x => x.VehicleName)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28;">
+                    <th>
                         <b>@Html.DisplayNameFor(x => x.VehicleColor)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28; text-align: center;">
+                    <th style="text-align: center;">
                         <b>@Html.DisplayNameFor(x => x.WantedFor)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28; text-align: right;">
+                    <th style="text-align: right;">
                         <!-- <b>Actions</b> -->
                         <a asp-action="bolo"><input class="btn btn-primary" type="submit" value="🖊" /></a>
                     </th>
@@ -42,19 +44,19 @@
                 {
 
                 <tr>
-                    <td style="color: white; background-color: #131E28;">
+                    <td>
                         @Html.DisplayFor(i => item.LicensePlate)
                     </td>
-                    <td style="color: white; background-color: #131E28;">
+                    <td>
                         @Html.DisplayFor(i => item.VehicleName)
                     </td>
-                    <td style="color: white; background-color: #131E28;">
+                    <td>
                         @Html.DisplayFor(i => item.VehicleColor)
                     </td>
-                    <td style="color: white; background-color: #131E28; text-align: center;">
+                    <td style="text-align: center;">
                         @Html.DisplayFor(i => item.WantedFor)
                     </td>
-                    <td style="color: white; background-color: #131E28; text-align: right;">
+                    <td style="text-align: right;">
                         <a asp-action="delete" asp-route-id="@item.Id"><input class="btn btn-danger" type="submit" value="🗑" /></a>
                     </td>
                 </tr>

@@ -37,6 +37,12 @@ namespace AOGPD.Controllers
         public IActionResult bolo()
             => View();
 
+        public IActionResult tencodes()
+            => View();
+
+        public IActionResult penalcode()
+            => View();
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> bolo(Bolo bolo)
