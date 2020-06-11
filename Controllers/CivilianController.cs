@@ -26,9 +26,6 @@ namespace AOGPD.Controllers
         public IActionResult plate()
             => View();
 
-        public IActionResult nodata()
-            => View();
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> civilian(CivilianCharacter civilianCharacter)

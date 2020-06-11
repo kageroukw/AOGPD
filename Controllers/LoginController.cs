@@ -32,9 +32,6 @@ namespace AOGPD.Controllers
         public IActionResult landing()
             => View();
 
-        public IActionResult nodata()
-            => View();
-
         [HttpGet]
         public async Task<IActionResult> login(string username, string password)
         {
@@ -50,7 +47,7 @@ namespace AOGPD.Controllers
 
                 if (disp == null)
                 {
-                    return RedirectToAction(nameof(nodata));
+                    return RedirectToAction("nodata", "aogpd");
                 }
 
                 return RedirectToAction("index", "dispatch");

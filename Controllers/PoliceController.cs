@@ -34,8 +34,23 @@ namespace AOGPD.Controllers
         public IActionResult plate()
             => View();
 
-        public IActionResult nodata()
+        public IActionResult bolo()
             => View();
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> bolo(Bolo bolo)
+        {
+            if (ModelState.IsValid)
+            {
+                _ctx.Add(bolo);
+                await _ctx.SaveChangesAsync();
+
+                return RedirectToAction(nameof(index));
+            }
+
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> lookup(string firstName, string lastName)
@@ -48,7 +63,7 @@ namespace AOGPD.Controllers
 
                 if (civi == null)
                 {
-                    return RedirectToAction(nameof(nodata));
+                    return RedirectToAction("nodata", "aogpd");
                 }
 
                 ViewBag.fName = civi.FirstName;
@@ -72,7 +87,7 @@ namespace AOGPD.Controllers
 
                 if (plate == null)
                 {
-                    return RedirectToAction(nameof(nodata));
+                    return RedirectToAction("nodata", "aogpd");
                 }
 
                 ViewBag.vicN = plate.VehicleName;
@@ -93,7 +108,7 @@ namespace AOGPD.Controllers
             var bolo = await _ctx.Bolo.FirstOrDefaultAsync(x => x.Id == id);
             if (bolo == null)
             {
-                return RedirectToAction(nameof(nodata));
+                return RedirectToAction("nodata", "aogpd");
             }
 
             return View(bolo);

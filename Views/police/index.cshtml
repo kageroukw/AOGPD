@@ -14,7 +14,7 @@
         </div>
     </div>
     <hr />
-    <h2>Bolos</h2>
+    <h3 class="display-4">Bolos</h3>
     <center>
         <table class="table">
             <thead>
@@ -28,11 +28,12 @@
                     <th style="color: white; background-color: #131E28;">
                         <b>@Html.DisplayNameFor(x => x.VehicleColor)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28;">
+                    <th style="color: white; background-color: #131E28; text-align: center;">
                         <b>@Html.DisplayNameFor(x => x.WantedFor)</b>
                     </th>
-                    <th style="color: white; background-color: #131E28;">
-                        <b>Actions</b>
+                    <th style="color: white; background-color: #131E28; text-align: right;">
+                        <!-- <b>Actions</b> -->
+                        <a asp-action="bolo"><input class="btn btn-primary" type="submit" value="🖊" /></a>
                     </th>
                 </tr>
             </thead>
@@ -50,11 +51,11 @@
                     <td style="color: white; background-color: #131E28;">
                         @Html.DisplayFor(i => item.VehicleColor)
                     </td>
-                    <td style="color: white; background-color: #131E28;">
+                    <td style="color: white; background-color: #131E28; text-align: center;">
                         @Html.DisplayFor(i => item.WantedFor)
                     </td>
-                    <td style="color: white; background-color: #131E28;">
-                        <a asp-action="delete" asp-route-id="@item.Id"><input class="btn btn-danger" type="submit" value="🗑️ Remove" /></a>
+                    <td style="color: white; background-color: #131E28; text-align: right;">
+                        <a asp-action="delete" asp-route-id="@item.Id"><input class="btn btn-danger" type="submit" value="🗑" /></a>
                     </td>
                 </tr>
                 }

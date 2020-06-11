@@ -1,0 +1,43 @@
+﻿@model Bolo
+
+@{
+    ViewData["Title"] = "New Bolo";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Register A New Bolo</h1>
+    <hr />
+    <form asp-action="bolo" enctype="multipart/form-data" method="post" class="mt-2">
+        <fieldset><legend>Register Bolo</legend></fieldset>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Vehicle Plate</label>
+            <div class="col-sm-10">
+                <input asp-for="LicensePlate" class="form-control" placeholder="Ex: 12AAA345" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Vehicle Name</label>
+            <div class="col-sm-10">
+                <input asp-for="VehicleName" class="form-control" placeholder="Ex: Contender" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Vehicle Color</label>
+            <div class="col-sm-2">
+                <input asp-for="VehicleColor" class="form-control" placeholder="Ex: Black" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Wanted For</label>
+            <div class="col-sm-2">
+                <input asp-for="WantedFor" class="form-control" placeholder="Ex: Felony Evading" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <a asp-action="Create"><input class="btn btn-success" type="submit" value="Register Bolo" /></a>
+            </div>
+            <label class="col-sm-2 col-form-label text text-success" id="succ" hidden>Successfully Registered!</label>
+        </div>
+    </form>
+</div>
