@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using AOGPD.Database;
 using AOGPD.ViewModels;
 using AOGPD.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AOGPD.Controllers
 {
@@ -85,6 +86,28 @@ namespace AOGPD.Controllers
             }
 
             return View("plate");
+        }
+
+        public async Task<IActionResult> delete(int? id)
+        {
+            var bolo = await _ctx.Bolo.FirstOrDefaultAsync(x => x.Id == id);
+            if (bolo == null)
+            {
+                return RedirectToAction(nameof(nodata));
+            }
+
+            return View(bolo);
+        }
+
+        [HttpPost, ActionName("delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> deleteconfirmed(int id)
+        {
+            var bolo = await _ctx.Bolo.FindAsync(id);
+            _ctx.Bolo.Remove(bolo);
+            await _ctx.SaveChangesAsync();
+
+            return RedirectToAction(nameof(index));
         }
     }
 }

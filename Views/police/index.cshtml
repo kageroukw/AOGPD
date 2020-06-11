@@ -54,7 +54,7 @@
                         @Html.DisplayFor(i => item.WantedFor)
                     </td>
                     <td style="color: white; background-color: #131E28;">
-                        <a asp-action="remove"><input class="btn btn-danger" type="submit" value="🗑️ Remove" /></a>
+                        <a asp-action="delete" asp-route-id="@item.Id"><input class="btn btn-danger" type="submit" value="🗑️ Remove" /></a>
                     </td>
                 </tr>
                 }
