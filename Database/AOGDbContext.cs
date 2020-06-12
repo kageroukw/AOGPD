@@ -18,8 +18,8 @@ namespace AOGPD.Database
         public DbSet<CivilianCharacter> Character { get; set; }
         public DbSet<CivilianLicensePlate> LicensePlate { get; set; }
         public DbSet<Dispatcher> Dispatch { get; set; }
-
         public DbSet<Bolo> Bolo { get; set; }
+        public DbSet<PenalCode> PenalCode { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -53,6 +53,11 @@ namespace AOGPD.Database
             bol.HasIndex(x => x.VehicleName);
             bol.HasIndex(x => x.VehicleColor);
             bol.HasIndex(x => x.WantedFor);
+
+            var pec = builder.Entity<PenalCode>().ToTable("PenalCode");
+            pec.HasIndex(x => x.Id);
+            pec.HasIndex(x => x.Code);
+            pec.HasIndex(x => x.PenalTime);
         }
     }
 }

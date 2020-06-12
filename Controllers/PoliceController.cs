@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using AOGPD.Database;
 using AOGPD.ViewModels;
 using AOGPD.Models;
-using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
 
 namespace AOGPD.Controllers
 {
