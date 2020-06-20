@@ -20,6 +20,7 @@ namespace AOGPD.Database
         public DbSet<Dispatcher> Dispatch { get; set; }
         public DbSet<Bolo> Bolo { get; set; }
         public DbSet<PenalCode> PenalCode { get; set; }
+        public DbSet<News> News { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -58,6 +59,13 @@ namespace AOGPD.Database
             pec.HasIndex(x => x.Id);
             pec.HasIndex(x => x.Code);
             pec.HasIndex(x => x.PenalTime);
+
+            var ns = builder.Entity<News>().ToTable("News");
+            ns.HasIndex(x => x.Id);
+            ns.HasIndex(x => x.Header);
+            ns.HasIndex(x => x.Body);
+            ns.HasIndex(x => x.PostedAt);
+            ns.HasIndex(x => x.Image);
         }
     }
 }
