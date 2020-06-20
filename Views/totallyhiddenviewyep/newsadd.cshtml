@@ -1,0 +1,36 @@
+﻿@model News
+
+@{
+    ViewData["Title"] = "Main";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Choose Your Side</h1>
+    <hr />
+    <form asp-action="addnews" enctype="multipart/form-data" method="post" class="mt-2">
+        <fieldset><legend>Dispatch Login</legend></fieldset>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input asp-for="Header" class="form-control" type="text" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Body</label>
+            <div class="col-sm-10">
+                <input asp-for="Body" class="form-control" type="text" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Publish Date</label>
+            <div class="col-sm-2">
+                <input asp-for="PostedAt" class="form-control" type="date" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <a asp-action="Create"><input class="btn btn-primary" type="submit" value="Add News" /></a>
+            </div>
+        </div>
+    </form>
+</div>

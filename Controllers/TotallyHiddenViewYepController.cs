@@ -34,6 +34,9 @@ namespace AOGPD.Controllers
         public IActionResult create()
             => View();
 
+        public IActionResult newsadd()
+            => View();
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> newdispatch(Dispatcher dispatcher)
@@ -49,6 +52,20 @@ namespace AOGPD.Controllers
                 _ctx.Add(dispatcher);
                 await _ctx.SaveChangesAsync();
                 return RedirectToAction(nameof(create));
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> addnews(News news)
+        {
+            if (ModelState.IsValid)
+            {
+                _ctx.Add(news);
+                await _ctx.SaveChangesAsync();
+                return RedirectToAction(nameof(newsadd));
             }
 
             return View();
