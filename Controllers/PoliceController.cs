@@ -50,7 +50,25 @@ namespace AOGPD.Controllers
         {
             if (ModelState.IsValid)
             {
-                _ctx.Add(bolo);
+
+                var uppercaseBolo = new Bolo
+                {
+                    LicensePlate = bolo.LicensePlate.ToUpper(),
+                    VehicleName = bolo.VehicleName.ToUpper(),
+                    VehicleColor = bolo.VehicleColor.ToUpper(),
+                    WantedFor = bolo.WantedFor.ToUpper()
+                };
+
+                var oldbolo = await _ctx.Bolo
+                    .Where(x => x.LicensePlate == uppercaseBolo.LicensePlate)
+                    .FirstOrDefaultAsync();
+
+                if (oldbolo != null)
+                {
+                    _ctx.Bolo.Remove(oldbolo);
+                }
+
+                _ctx.Add(uppercaseBolo);
                 await _ctx.SaveChangesAsync();
 
                 return RedirectToAction(nameof(index));
@@ -65,7 +83,7 @@ namespace AOGPD.Controllers
             if (ModelState.IsValid)
             {
                 var civi = await _ctx.Character
-                    .Where(x => x.FirstName == firstName && x.LastName == lastName)
+                    .Where(x => x.FirstName == firstName.ToUpper() && x.LastName == lastName.ToUpper())
                     .FirstOrDefaultAsync();
 
                 if (civi == null)
@@ -89,7 +107,7 @@ namespace AOGPD.Controllers
             if (ModelState.IsValid)
             {
                 var plate = await _ctx.LicensePlate
-                    .Where(x => x.LicensePlate == licensePlate)
+                    .Where(x => x.LicensePlate == licensePlate.ToUpper())
                     .FirstOrDefaultAsync();
 
                 if (plate == null)

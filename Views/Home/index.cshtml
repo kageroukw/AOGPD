@@ -1,10 +1,33 @@
-﻿@{
+﻿@model IEnumerable<News>
+
+@{
     ViewData["Title"] = "Main";
 }
 
 <div class="text-center">
     <h1 class="display-4">Choose Your Side</h1>
-    <hr />
     <a asp-controller="civilian" asp-action="civilian"><input id="CivButton" type="button" value="Civilian" class="btn btn-success"/></a>
     <a asp-controller="police" asp-action="index"><input id="PoButton" type="button" value="Police" class="btn btn-primary"/></a>
+
+    <hr />
+    <h4 class="display-4">News</h4>
+
+    @foreach (var item in Model)
+    {
+        <div class="row justify-content-center m-3">
+            <div class="col-sm-8">
+                <div class="card" style="color: #131E28; background-color: #131E28;">
+                    <div class="card-body text-center">
+                        @if (item.Image != null)
+                        {
+                            <img class="card-img-top" src="@Html.DisplayFor(i => item.Image)" style="width: 150px; height: 150px;" />
+                        }
+                        <h2 class="text text-warning">@Html.DisplayFor(i => item.Header)</h2>
+                        <p class="text text-light" style="font-size: 18px;">@Html.DisplayFor(i => item.Body)</p>
+                        <p class="text text-light" style="font-size: 14px;">@Html.DisplayFor(i => item.PostedAt)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

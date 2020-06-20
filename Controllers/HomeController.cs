@@ -1,25 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using AOGPD.Models;
+using AOGPD.Database;
+using System.Collections;
 
 namespace AOGPD.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AOGDbContext _ctx;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AOGDbContext ctx)
         {
             _logger = logger;
+            _ctx = ctx;
         }
 
-        public IActionResult index()
-            => View();
+        public async Task<IActionResult> index()
+        {
+            return View(await _ctx.News.OrderByDescending(x => x.Id).ToListAsync());
+        }
 
         public IActionResult about()
             => View();

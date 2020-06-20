@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AOGPD.Database;
 using AOGPD.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace AOGPD.Controllers
@@ -32,7 +34,25 @@ namespace AOGPD.Controllers
         {
             if (ModelState.IsValid)
             {
-                _ctx.Add(civilianCharacter);
+                var uppercaseCharacter = new CivilianCharacter
+                {
+                    FirstName = civilianCharacter.FirstName.ToUpper(),
+                    LastName = civilianCharacter.LastName.ToUpper(),
+                    DateofBirth = civilianCharacter.DateofBirth,
+                    Citations = civilianCharacter.Citations,
+                    Wanted = civilianCharacter.Wanted,
+                };
+
+                var oldcivi = await _ctx.Character
+                    .Where(x => x.FirstName == uppercaseCharacter.FirstName && x.LastName == uppercaseCharacter.LastName)
+                    .FirstOrDefaultAsync();
+
+                if (oldcivi != null)
+                {
+                    _ctx.Character.Remove(oldcivi);
+                }
+
+                _ctx.Add(uppercaseCharacter);
                 await _ctx.SaveChangesAsync();
                 return RedirectToAction(nameof(civilian));
             }
@@ -46,7 +66,28 @@ namespace AOGPD.Controllers
         {
             if (ModelState.IsValid)
             {
-                _ctx.Add(civilianPlate);
+                var uppercasePlate = new CivilianLicensePlate
+                {
+                    LicensePlate = civilianPlate.LicensePlate.ToUpper(),
+                    PlateOwner = civilianPlate.PlateOwner.ToUpper(),
+                    Registration = civilianPlate.Registration,
+                    Insurance = civilianPlate.Insurance,
+                    Additional = civilianPlate.Additional.ToUpper(),
+                    VehicleName = civilianPlate.VehicleName.ToUpper(),
+                    VehicleColor = civilianPlate.VehicleColor.ToUpper(),
+                    AdditionalVehicleDetails = civilianPlate.AdditionalVehicleDetails.ToUpper()
+                };
+
+                var oldplate = await _ctx.LicensePlate
+                    .Where(x => x.LicensePlate == uppercasePlate.LicensePlate)
+                    .FirstOrDefaultAsync();
+
+                if (oldplate != null)
+                {
+                    _ctx.LicensePlate.Remove(oldplate);
+                }
+
+                _ctx.Add(uppercasePlate);
                 await _ctx.SaveChangesAsync();
                 return RedirectToAction(nameof(plate));
             }
