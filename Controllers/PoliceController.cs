@@ -50,7 +50,6 @@ namespace AOGPD.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var uppercaseBolo = new Bolo
                 {
                     LicensePlate = bolo.LicensePlate.ToUpper(),
